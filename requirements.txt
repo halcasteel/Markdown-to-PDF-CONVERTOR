@@ -1,0 +1,22 @@
+# Markdown to PDF Converter Requirements
+# Production dependencies with tested versions
+
+# Core dependencies
+markdown>=3.5.0
+weasyprint>=60.0
+pygments>=2.16.0
+
+# WeasyPrint dependencies (may need system packages)
+# On macOS: brew install cairo pango gdk-pixbuf libffi
+# On Ubuntu/Debian: apt-get install python3-cffi python3-brotli libpango-1.0-0 libharfbuzz0b libpangoft2-1.0-0
+# On Windows: Follow https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#windows
+
+# Optional dependencies for enhanced features
+cairocffi>=1.6.0
+Pillow>=10.0.0
+cffi>=1.15.0
+
+# Development dependencies
+pytest>=7.4.0
+black>=23.0.0
+mypy>=1.5.0

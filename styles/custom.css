@@ -1,0 +1,398 @@
+/* Custom CSS for Markdown to PDF Converter
+ * This file demonstrates advanced styling options
+ * Use with: python markdown_to_pdf.py input.md -c custom.css
+ */
+
+/* Page Setup */
+@page {
+    size: A4;
+    margin: 25mm 20mm 25mm 20mm;
+    
+    @top-center {
+        content: string(doctitle);
+        font-size: 9pt;
+        color: #666;
+    }
+    
+    @bottom-right {
+        content: counter(page) " / " counter(pages);
+        font-size: 9pt;
+        color: #666;
+    }
+    
+    @bottom-left {
+        content: string(author);
+        font-size: 9pt;
+        color: #666;
+    }
+}
+
+@page :first {
+    @top-center { content: none; }
+    @bottom-right { content: none; }
+    @bottom-left { content: none; }
+}
+
+/* Custom Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+body {
+    font-family: 'Fira Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: #2c3e50;
+    counter-reset: chapter section subsection;
+}
+
+/* Automatic Chapter Numbering */
+h1 {
+    counter-increment: chapter;
+    counter-reset: section subsection;
+}
+
+h1::before {
+    content: counter(chapter) ". ";
+    color: #3498db;
+    font-weight: 700;
+}
+
+h2 {
+    counter-increment: section;
+    counter-reset: subsection;
+}
+
+h2::before {
+    content: counter(chapter) "." counter(section) " ";
+    color: #3498db;
+    font-weight: 600;
+}
+
+h3 {
+    counter-increment: subsection;
+}
+
+h3::before {
+    content: counter(chapter) "." counter(section) "." counter(subsection) " ";
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* Headers Styling */
+h1 {
+    font-size: 24pt;
+    color: #2c3e50;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    margin: 40px 0 20px 0;
+    page-break-after: avoid;
+    string-set: doctitle content();
+}
+
+h2 {
+    font-size: 18pt;
+    color: #34495e;
+    border-bottom: 1px solid #bdc3c7;
+    padding-bottom: 8px;
+    margin: 30px 0 15px 0;
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 14pt;
+    color: #34495e;
+    margin: 20px 0 10px 0;
+    page-break-after: avoid;
+}
+
+/* Code Blocks with Syntax Highlighting */
+pre {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2px;
+    border-radius: 8px;
+    margin: 20px 0;
+    page-break-inside: avoid;
+}
+
+pre code {
+    display: block;
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 15px;
+    border-radius: 6px;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 9pt;
+    line-height: 1.5;
+    overflow-x: auto;
+}
+
+code {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9em;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 20px 0;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    page-break-inside: avoid;
+}
+
+table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    letter-spacing: 0.5px;
+}
+
+table td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Blockquotes */
+blockquote {
+    position: relative;
+    padding: 20px 20px 20px 50px;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 8px;
+    font-style: italic;
+    color: #555;
+}
+
+blockquote::before {
+    content: '"';
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    font-size: 40pt;
+    color: #3498db;
+    opacity: 0.3;
+    font-family: Georgia, serif;
+}
+
+/* Lists */
+ul, ol {
+    padding-left: 25px;
+    margin: 15px 0;
+}
+
+li {
+    margin: 8px 0;
+    line-height: 1.6;
+}
+
+ul li::marker {
+    color: #3498db;
+    font-size: 1.2em;
+}
+
+ol li::marker {
+    color: #3498db;
+    font-weight: 600;
+}
+
+/* Links */
+a {
+    color: #3498db;
+    text-decoration: none;
+    border-bottom: 1px dotted #3498db;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9;
+    border-bottom-style: solid;
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin: 20px 0;
+    display: block;
+}
+
+/* Horizontal Rules */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(to right, #3498db, #9b59b6, #3498db);
+    margin: 40px 0;
+}
+
+/* Table of Contents Styling */
+.toc {
+    background: #f8f9fa;
+    border: 2px solid #3498db;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    page-break-after: always;
+}
+
+.toc h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.toc ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.toc ul ul {
+    padding-left: 20px;
+}
+
+.toc li {
+    margin: 8px 0;
+}
+
+.toc a {
+    color: #34495e;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.toc a:hover {
+    color: #3498db;
+}
+
+/* Admonition Boxes */
+.admonition {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid;
+    page-break-inside: avoid;
+}
+
+.admonition.note {
+    background: #e3f2fd;
+    border-color: #2196f3;
+}
+
+.admonition.warning {
+    background: #fff3e0;
+    border-color: #ff9800;
+}
+
+.admonition.danger {
+    background: #ffebee;
+    border-color: #f44336;
+}
+
+.admonition.success {
+    background: #e8f5e9;
+    border-color: #4caf50;
+}
+
+.admonition-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
+
+/* Print Optimizations */
+@media print {
+    body {
+        font-size: 10pt;
+    }
+    
+    pre, blockquote {
+        page-break-inside: avoid;
+    }
+    
+    h1, h2, h3 {
+        page-break-after: avoid;
+    }
+    
+    table {
+        page-break-inside: auto;
+    }
+    
+    tr {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+}
+
+/* Custom Classes for Special Elements */
+.page-break {
+    page-break-after: always;
+}
+
+.no-break {
+    page-break-inside: avoid;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.small {
+    font-size: 0.85em;
+}
+
+.large {
+    font-size: 1.2em;
+}
+
+/* Cover Page Styling */
+.cover-page {
+    page-break-after: always;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.cover-page h1 {
+    font-size: 36pt;
+    margin-bottom: 50px;
+    border: none;
+}
+
+.cover-page .author {
+    font-size: 18pt;
+    color: #555;
+    margin: 20px 0;
+    string-set: author content();
+}
+
+.cover-page .date {
+    font-size: 14pt;
+    color: #777;
+}
